@@ -1,0 +1,382 @@
+MASTER PROMPT (RUN FIRST — PROJECT BOOTSTRAP)
+
+Prompt:
+
+Create a full-stack web application named LearPath.
+
+The app must replicate the core learning flow and structure of the Siyavula platform, but all branding must be LearPath only.
+
+Stack (mandatory):
+
+Frontend: HTML5, CSS3, JavaScript, React
+
+Backend: Django + Django REST Framework
+
+Database: SQLite
+
+ML: Python (scikit-learn)
+
+API: REST only
+
+Non-negotiable rules:
+
+Every HTML element MUST have both an id and a class
+
+All HTML files must load ONE stylesheet: static/css/main.css
+
+Color scheme: shining orange primary, white secondary
+
+Frontend must use animations and transitions
+
+Modular file structure (no monolithic files)
+
+App must run successfully on Replit without manual fixes
+
+Generate the full folder structure and all required files.
+
+FILE STRUCTURE PROMPT
+
+Prompt:
+
+Create the following folder structure exactly:
+
+LearPath/
+├── backend/
+│   ├── manage.py
+│   ├── learnerpath/
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── asgi.py
+│   │   ├── wsgi.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── permissions.py
+│   └── ml/
+│       ├── study_habit_model.py
+│       ├── report_card_model.py
+├── frontend/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── teacher.html
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── components/
+│   │   │   ├── ChatbotLearner.js
+│   │   │   ├── ChatbotGeneral.js
+│   │   │   ├── VideoCard.js
+│   │   │   ├── StudyPathCard.js
+├── static/
+│   ├── css/
+│   │   └── main.css
+└── requirements.txt
+
+
+Do not omit any file.
+
+BACKEND PROMPTS (DJANGO)
+requirements.txt
+
+Prompt:
+
+Populate requirements.txt with:
+
+django
+
+djangorestframework
+
+scikit-learn
+
+numpy
+
+pandas
+
+openai (or placeholder GPT client)
+
+django-cors-headers
+
+backend/api/models.py
+
+Prompt:
+
+Implement Django models:
+
+User (extend AbstractUser)
+
+LearnerProfile (user, grade, subjects)
+
+TeacherProfile (user, email, mobile_number, subject_specialty)
+
+StudySession (learner, subject, duration, timestamp)
+
+ReportCard (learner, subject, percentage)
+
+Video (teacher, title, subject, description, ai_summary, upload_date)
+
+VideoRating (video, user, rating)
+
+Comment (video, user, content, timestamp)
+
+Use proper ForeignKeys, CASCADE deletes, and constraints.
+
+backend/api/serializers.py
+
+Prompt:
+
+Create serializers for all models.
+
+Validation rules:
+
+Grades must be 0–100
+
+Video ratings must be 1–5
+
+Teacher email must be unique
+
+Use ModelSerializer everywhere.
+
+backend/api/views.py
+
+Prompt:
+
+Implement REST API views for:
+
+Learner registration and login
+
+Teacher registration and login
+
+Upload study sessions
+
+Upload report cards
+
+Fetch ML topic suggestions
+
+Fetch 3 study paths
+
+Upload videos
+
+Rate videos
+
+Comment on videos
+
+Chatbot endpoints (general + learner)
+
+Use class-based views only.
+Return JSON only.
+No template rendering.
+
+backend/api/urls.py
+
+Prompt:
+
+Define REST endpoints for all API views.
+
+Prefix everything with /api/.
+
+backend/ml/study_habit_model.py
+
+Prompt:
+
+Implement a Python ML model that:
+
+Accepts study session data
+
+Calculates time spent per subject
+
+Identifies underperforming subjects
+
+Returns 3 recommended new topics
+
+Output must be JSON.
+Model must be simple and explainable.
+
+backend/ml/report_card_model.py
+
+Prompt:
+
+Implement a Python ML model that:
+
+Accepts report card data
+
+Identifies weak subjects
+
+Generates EXACTLY 3 study paths
+
+Each study path must include:
+
+Focus subjects
+
+Daily study time
+
+Weekly goal
+
+Output JSON only.
+
+GPT VIDEO SUMMARY (BACKEND)
+
+Prompt:
+
+Implement a function that:
+
+Takes video title and description
+
+Generates an AI educational summary
+
+Allows teacher to edit before saving
+
+If GPT is unavailable, return a fallback summary.
+
+FRONTEND PROMPTS (HTML)
+frontend/index.html
+
+Prompt:
+
+Create the LearPath landing page.
+
+Sections:
+
+Header with navigation
+
+Animated hero section
+
+Feature cards
+
+Call-to-action buttons
+
+Rules:
+
+Every element has id + class
+
+Load static/css/main.css
+
+Include React root div
+
+No inline styles
+
+frontend/dashboard.html
+
+Prompt:
+
+Create learner dashboard page.
+
+Include:
+
+Study progress
+
+ML topic suggestions
+
+Study paths
+
+Learner chatbot container
+
+Prepare placeholders for React rendering.
+
+frontend/teacher.html
+
+Prompt:
+
+Create teacher dashboard.
+
+Include:
+
+Teacher details form
+
+Video upload form
+
+Uploaded videos list
+
+Video ratings and comments
+
+All inputs must have labels, ids, and classes.
+
+REACT PROMPTS
+frontend/src/App.js
+
+Prompt:
+
+Implement main React app.
+
+Responsibilities:
+
+Handle routing
+
+Fetch data from Django API
+
+Render dashboards
+
+Use hooks only.
+No external state libraries.
+
+ChatbotLearner.js
+
+Prompt:
+
+Implement learner chatbot.
+
+Purpose:
+
+Help with tasks
+
+Keep learner on track
+
+Features:
+
+Message history
+
+REST API calls
+
+Animated message display
+
+ChatbotGeneral.js
+
+Prompt:
+
+Implement general LearPath chatbot.
+
+Purpose:
+
+Explain platform content
+
+Guide new users
+
+Stateless UI.
+API driven responses.
+
+CSS PROMPT
+static/css/main.css
+
+Prompt:
+
+Create global stylesheet.
+
+Include:
+
+Reset
+
+Layout utilities
+
+Buttons
+
+Cards
+
+Animations
+
+Animations:
+
+Fade-in on load
+
+Hover scale
+
+Smooth transitions
+
+Color palette:
+
+Orange primary
+
+White secondary
+
+Dark gray text
